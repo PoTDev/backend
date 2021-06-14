@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+  <title>Панель управления</title>
+</head>
+
+<body>
+
+<section layout:fragment="header">
+  <h1>
+    Загрузка изображений
+    <small>Панель управления</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="/"><i class="fa fa-dashboard"></i> Главная страница</a></li>
+    <li class="active">Панель управления</li>
+  </ol>
+</section>
+
+
+<div layout:fragment="content">
+
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="box">
+        <div class="box-header">
+          <h3 class="box-title">Загрузка изображений</h3>
+        </div>
+        <!-- /.box-header -->
+
+        <div class="box-body">
+          <div class="box-footer center">
+
+            <div th:if="${message}">
+              <h2 th:text="${message}"/>
+            </div>
+            <form method="POST" enctype="multipart/form-data" action="/">
+              <div class="form-group">
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="customFile" name="file">
+                  <label class="custom-file-label" for="customFile">Выберите файл</label>
+                </div>
+              </div>
+
+              <button class="btn btn-primary" type="submit">Submit form</button>
+            </form>
+
+
+
+          </div>
+
+        </div>
+
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+  <!-- /.col -->
+</div>
+</div>
+
+<script th:src="@{assets/custom-file-input/bs-custom-file-input.js}"></script>
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+
+<script>
+  bsCustomFileInput.init();
+</script>
+</body>
+</html>

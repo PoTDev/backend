@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+    <title>Панель управления</title>
+</head>
+
+<body>
+
+<section layout:fragment="header">
+    <h1>
+        Просмотр изображений
+        <small>Панель управления</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/"><i class="fa fa-dashboard"></i> Главная страница</a></li>
+        <li class="active">Панель управления</li>
+    </ol>
+</section>
+
+
+<div layout:fragment="content">
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h4 class="card-title">Ekko Lightbox</h4>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <a href="https://via.placeholder.com/1200/FFFFFF.png?text=1" data-toggle="lightbox" data-title="sample 1 - white" data-gallery="gallery">
+                                    <img src="https://via.placeholder.com/300/FFFFFF?text=1" class="img-fluid mb-2" alt="white sample"/>
+                                </a>
+                            </div>
+                        <a href="#" class="btn btn-warning btn-xs purple editView" title="full" th:href="@{'/exam/list/'}"><i class="fa fa-edit"></i> Сброс</a>
+                        </div>
+                    </div>
+                </div>
+            <!-- /.box-body -->
+            </div>
+        <!-- /.box -->
+        </div>
+    <!-- /.col -->
+    </div>
+</div>
+
+
+<th:block layout:fragment="script">
+    <script>
+        $(function () {
+
+            $('#example1').DataTable({
+                'paging'      : true,
+                'lengthChange': false,
+                'searching'   : true,
+                'ordering'    : true,
+                'info'        : true,
+                'autoWidth'   : false
+            })
+
+            jQuery('#example1_wrapper input').addClass("form-control input-sm"); // modify table search input
+        })
+
+
+    </script>
+</th:block>
+</body>
+
+</html>

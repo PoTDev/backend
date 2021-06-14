@@ -31,6 +31,20 @@
                             </button>
                         </a>
                     </div>
+                    <div th:if="${param.success}">
+                        <div class="alert alert-success alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h4><i class="icon fa fa-check"></i> Success!</h4>
+                            Information saved successfully.
+                        </div>
+                    </div>
+                    <div th:if="${param.deleted}">
+                        <div class="alert alert-info alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h4><i class="icon fa fa-check"></i> Deleted!</h4>
+                            Information deleted successfully.
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-sm-12">
                             <table id="example1" class="table table-bordered table-striped dataTable" role="grid"

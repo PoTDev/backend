@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Login</title>
+    <title>Вход</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
     <!-- Bootstrap 3.3.6 -->
@@ -19,19 +19,19 @@
 <body class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
-        <a href="#"><b>Admin</b>LTE</a>
+        <a href="#"><b>Медицинское </b>приложение</a>
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
-        <p class="login-box-msg">Sign in to start your session</p>
+        <p class="login-box-msg">Вход в мединское приложение</p>
         <div th:if="${param.error}">
             <div class="alert alert-danger">
-                Invalid username and password.
+                Неправильный логин или пароль.
             </div>
         </div>
         <div th:if="${param.logout}">
             <div class="alert alert-info">
-                You have been logged out.
+                Вы успешно вышли.
             </div>
         </div>
         <form th:action="@{/login}" method="post">
@@ -53,13 +53,13 @@
                 </div>
                 <!-- /.col -->
                 <div class="col-xs-4">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">Войти</button>
                 </div>
                 <!-- /.col -->
             </div>
         </form>
 
-        <a th:href="@{/register}" class="text-center">Register a new membership</a>
+        <a th:href="@{/register}" class="text-center">Зарегистрироваться, как новый пользователь</a>
 
     </div>
     <!-- /.login-box-body -->

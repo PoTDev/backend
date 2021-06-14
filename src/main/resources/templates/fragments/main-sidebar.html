@@ -1,5 +1,5 @@
 <!-- sidebar: style can be found in sidebar.less -->
-<section class="sidebar" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<section class="sidebar" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"   xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
     <!-- Sidebar user panel -->
     <div class="user-panel">
         <div class="pull-left image">
@@ -7,15 +7,15 @@
         </div>
         <div class="pull-left info">
             <p sec:authentication="principal.username"></p>
-            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+            <a href="#"><i class="fa fa-circle text-success"></i> Онлайн</a>
         </div>
     </div>
     <!-- sidebar menu: : style can be found in sidebar.less -->
     <ul class="sidebar-menu">
-        <li class="header">MAIN NAVIGATION</li>
+        <li class="header">Главное меню навигации</li>
         <li class="active treeview">
             <a href="#">
-                <i class="fa fa-th"></i> <span>Options</span>
+                <i class="fa fa-th"></i> <span>Разделы</span>
                 <span class="pull-right-container">
           <i class="fa fa-angle-left pull-right"></i>
         </span>
@@ -24,10 +24,29 @@
 <!--
                 <li class="active"><a href="/"><i class="fa fa-dashboard"></i> Dashboard v1</a></li>
 -->
+                <div sec:authorize="isAuthenticated()">
+                <li class="active"><a th:href="@{/myprofile/view}"><i class="fa fa-circle-o"></i> Мой профиль</a></li>
+                </div>
 
-                <li class="active"><a th:href="@{/product/list}"><i class="fa fa-circle-o"></i> Product</a></li>
-                <li><a th:href="@{/producttype/list}"><i class="fa fa-circle-o"></i> Product Type</a></li>
-                <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}"><i class="fa fa-circle-o"></i> Logout</a></li>
+                <div sec:authorize="hasAuthority('ADMIN')">
+                <li class="active"><a th:href="@{/profile/list}"><i class="fa fa-circle-o"></i> Все пользователи</a></li>
+                </div>
+
+                <div sec:authorize="hasAuthority('ADMIN')">
+                <li class="active"><a th:href="@{/exam/list}"><i class="fa fa-circle-o"></i> Все осмотры</a></li>
+                </div>
+
+
+                <div sec:authorize="hasAuthority('USER')">
+                    <li class="active"><a th:href="@{/profile/list}"><i class="fa fa-circle-o"></i> Мои осмотры</a></li>
+                </div>
+
+                <div sec:authorize="isAuthenticated()">
+                    <li class="active"><a th:href="@{/picture/load}"><i class="fa fa-circle-o"></i> Картинки</a></li>
+                </div>
+
+
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}"><i class="fa fa-circle-o"></i> Выйти</a></li>
             </ul>
         </li>
     </ul>

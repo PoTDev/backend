@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+    <title>Панель управления</title>
+</head>
+<body>
+<section layout:fragment="header">
+    <h1>
+        Список пользователей
+        <small>Панель управления</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/"><i class="fa fa-dashboard"></i> Главная страница</a></li>
+        <li class="active">Панель управления</li>
+    </ol>
+</section>
+<div layout:fragment="content">
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Список пользователей</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <img alt="" style="width:300px;" title="" class="img-circle img-thumbnail isTooltip" src="https://bootdey.com/img/Content/avatar/avatar7.png" data-original-title="Usuario">
+                                        </div>
+                                        <div>
+                                            <strong>Информация о профиле</strong><br>
+                                            <!--НАЧАЛО ТАБЛИЦЫ -->
+                                            <div class="table-responsive">
+                                                <table class="table table-user-information">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col" >Имя</th>
+                                                            <th scope="col" >Фамилия</th>
+                                                            <th scope="col" >Электронная почта</th>
+                                                            <th scope="col" >Активен ли</th>
+                                                            <th scope="col" >Роль</th>
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td th:text="${myprofile.firstName}"/>
+                                                            <td th:text="${myprofile.lastName}"/>
+                                                            <td th:text="${myprofile.email}"/>
+                                                            <td th:text="${myprofile.active}"/>
+                                                            <td th:each="role : ${myprofile.roles}">
+                                                                <p th:text="${role.name}"></p>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+</div>
+<!--                                                    <tbody>-->
+<!--                                                    <tr th:each="myprofiles :${myprofile}">-->
+<!--                                                        <td>-->
+<!--                                                            <strong>-->
+<!--                                                                <span class="glyphicon glyphicon-user  text-primary"></span>-->
+<!--                                                                Имя-->
+<!--                                                            </strong>-->
+<!--                                                        </td>-->
+<!--                                                        <td th:text="${myprofiles.firstName}" class="text-primary">-->
+<!--                                                            Имя-->
+<!--                                                        </td>-->
+<!--                                                    </tr>-->
+<!--                                                    <tr th:each="myprofiles :${myprofile}">-->
+<!--                                                        <td>-->
+<!--                                                            <strong>-->
+<!--                                                                <span class="glyphicon glyphicon-cloud text-primary"></span>-->
+<!--                                                                Фамилия-->
+<!--                                                            </strong>-->
+<!--                                                        </td>-->
+<!--                                                        <td th:text="${myprofiles.lastName}" class="text-primary">-->
+<!--                                                            Фамилия-->
+<!--                                                        </td>-->
+<!--                                                    </tr>-->
+
+<!--                                                    <tr th:each="myprofiles :${myprofile}">-->
+<!--                                                        <td>-->
+<!--                                                            <strong>-->
+<!--                                                                <span class="glyphicon glyphicon-bookmark text-primary"></span>-->
+<!--                                                                Электронная почта-->
+<!--                                                            </strong>-->
+<!--                                                        </td>-->
+<!--                                                        <td th:text="${myprofiles.email}" class="text-primary">-->
+<!--                                                            Электронная почта-->
+<!--                                                        </td>-->
+<!--                                                    </tr>-->
+
+
+<!--                                                    <tr th:each="myprofiles :${myprofile}">-->
+<!--                                                        <td>-->
+<!--                                                            <strong>-->
+<!--                                                                <span class="glyphicon glyphicon-eye-open text-primary"></span>-->
+<!--                                                                Роль-->
+<!--                                                            </strong>-->
+<!--                                                        </td>-->
+<!--                                                        <tr th:each="role : ${myprofiles.roles}">-->
+<!--                                                            <td th:text="${role.name}"></td>-->
+<!--                                                        </tr>-->
+<!--                                                    </tr>-->
+<!--&lt;!&ndash;                                                        <td th:text="${myprofiles.roles}" class="text-primary">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                            Роль&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        </td>&ndash;&gt;-->
+
+<!--                                                    <tr th:each="myprofiles :${myprofile}">-->
+<!--                                                        <td>-->
+<!--                                                            <strong>-->
+<!--                                                                <span class="glyphicon glyphicon-envelope text-primary"></span>-->
+<!--                                                                Активен ли-->
+<!--                                                            </strong>-->
+<!--                                                        </td>-->
+<!--                                                        <td th:text="${myprofiles.active}" class="text-primary">-->
+<!--                                                            Активен ли-->
+<!--                                                        </td>-->
+<!--                                                    </tr>-->
+<!--                                                    </tbody>-->
+<!--                                                </table>-->
+
+
+
+
+
+
+                            <!--ЭТО ГОТОВОЕ<div class="col-sm-12">
+                                <table id="example1" class="table table-bordered table-striped dataTable" role="grid"
+                                       aria-describedby="example1_info">
+                                    <thead class="thead">
+                                    <tr>
+                                        <th>Имя</th>
+                                        <th>Фамилия</th>
+                                        <th>Электронная почта</th>
+                                        <th>Роль</th>
+                                        <th>Активен ли</th>
+                                        <th>Пароль</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="profiles : ${myprofile}">
+                                        <td th:text="${profiles.firstName}">Имя</td>
+                                        <td th:text="${profiles.lastName}">Фамилия</td>
+                                        <td th:text="${profiles.email}">Электронная почта</td>
+                                        <td th:text="${profiles.roles}">Роль</td>
+                                        <td th:text="${profiles.active}">Активен ли</td>
+                                        <td th:text="${profiles.password}">Пароль</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <--КОНЕЦ ГОТОВОГО</div>-->
+
+
+
+<th:block layout:fragment="script">
+    <script>
+        $(function () {
+
+            $('#example1').DataTable({
+                'paging'      : true,
+                'lengthChange': false,
+                'searching'   : true,
+                'ordering'    : true,
+                'info'        : true,
+                'autoWidth'   : false
+            })
+
+            jQuery('#example1_wrapper input').addClass("form-control input-sm"); // modify table search input
+        })
+
+
+    </script>
+</th:block>
+</body>
+
+</html>

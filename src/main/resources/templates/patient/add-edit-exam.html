@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+    <title>Панель управления</title>
+</head>
+<body>
+<section layout:fragment="header">
+    <h1>
+        Список пользователей
+        <small>Панель управления</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/"><i class="fa fa-dashboard"></i> Главная страница</a></li>
+        <li class="active">Панель управления</li>
+    </ol>
+</section>
+<div layout:fragment="content">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- Horizontal Form -->
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Все осмотры</h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <form th:action="@{/exam/save}" th:object="${exams}" method="post" class="form-horizontal">
+                    <div class="box-body">
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Exam Id</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control"  readonly="readonly" th:field="*{exam_id}" placeholder="Exam Id">
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Электронная почта</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" th:field="*{email}" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Дата осмотра</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control"  th:field="*{date}" />
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Жалобы</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" th:field="*{petition}" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Анамнез заболевания</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" th:field="*{anamnez}" />
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Общие данные об осмотре</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" th:field="*{commonData}" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Диагноз</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" th:field="*{diagnosis}" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Рекомендации</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" th:field="*{advice}" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Загрузка доп.файлов</label>
+                            <div class="col-sm-10">
+                            <a href="#" class="btn btn-primary btn-xs purple editView" title="Edit" th:href="@{'/picture/load/' + ${exams.exam_id}}"><i class="fa fa-edit"></i> Загрузить файлы</a>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer center">
+                        <a th:href="@{/exam/list}">
+                            <button type="button" class="btn btn-default"><i class="fa fa-right"></i> Сброс</button>
+                        </a>
+                        <button type="submit" class="btn btn-info pull-right"><i class="fa fa-save"></i> Сохранить</button>
+                    </div>
+                    <!-- /.box-footer -->
+                </form>
+            </div>
+            <!-- /.box -->
+        </div>
+    </div>
+</div>
+
+<th:block layout:fragment="script">
+    <script>
+    </script>
+</th:block>
+
+</body>
+
+</html>

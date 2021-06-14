@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Register</title>
+    <title>Регистрация</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
     <!-- Bootstrap 3.3.6 -->
@@ -19,27 +19,26 @@
 <body class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
-        <a href="#"><b>Admin</b>LTE</a>
+        <a href="#"><b>Медицинское </b>приложение</a>
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
-        <p class="login-box-msg">Registration</p>
+        <p class="login-box-msg">Регистрация</p>
 
         <div th:if="${param.error}">
             <div class="alert alert-danger">
-                There was some error in registration.
+                Ошибка при регистрации.
             </div>
         </div>
 
         <div th:if="${param.username}">
             <div class="alert alert-danger">
-                There is already a user registered with the username/email provided.
+                Пользовать с такими данными уже зарегистрирован!.
             </div>
         </div>
 
         <div th:if="${param.success}">
-            <div class="alert alert-info">You've successfully registered
-                to our awesome app!</div>
+            <div class="alert alert-info">Вы успешно зарегистрировались!</div>
         </div>
 
         <form th:action="@{/register}" th:object="${userRegistrationDto}" method="post">
@@ -66,12 +65,12 @@
                 </div>
                 <!-- /.col -->
                 <div class="col-xs-4">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">Зарегистрироваться</button>
                 </div>
                 <!-- /.col -->
             </div>
         </form>
-        <a th:href="@{/login}" class="text-center">Already member login here</a>
+        <a th:href="@{/login}" class="text-center">Уже регистрировались? Войдите</a>
     </div>
     <!-- /.login-box-body -->
 </div>
