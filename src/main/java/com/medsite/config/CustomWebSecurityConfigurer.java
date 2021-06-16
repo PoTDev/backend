@@ -54,7 +54,6 @@ public class CustomWebSecurityConfigurer extends WebSecurityConfigurerAdapter {
                 , "/bootstrap/**"
                 , "/extra/**"
                 , "/favicon.ico").permitAll()
-//                .antMatchers(("/edit/**")).hasAnyRole("MEDIC")
         .anyRequest().authenticated()
                 .and()
                 .formLogin()

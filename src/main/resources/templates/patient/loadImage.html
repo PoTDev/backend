@@ -5,9 +5,7 @@
 <head>
   <title>Панель управления</title>
 </head>
-
 <body>
-
 <section layout:fragment="header">
   <h1>
     Загрузка изображений
@@ -18,57 +16,96 @@
     <li class="active">Панель управления</li>
   </ol>
 </section>
-
-
 <div layout:fragment="content">
-
   <div class="row">
-    <div class="col-xs-12">
-      <div class="box">
-        <div class="box-header">
-          <h3 class="box-title">Загрузка изображений</h3>
+    <div class="col-md-12">
+      <!-- Horizontal Form -->
+      <div class="box box-info">
+        <div class="box-header with-border">
+          <h3 class="box-title">Все осмотры</h3>
         </div>
         <!-- /.box-header -->
+        <!-- form start -->
 
-        <div class="box-body">
-          <div class="box-footer center">
 
-            <div th:if="${message}">
-              <h2 th:text="${message}"/>
+        <form th:object="${imageData}" method="post" th:action="@{/exam/load}" enctype="multipart/form-data">
+        <div class="card mb-4">
+          <div class="card-body">
+            <div class="form-group">
+              <label for="newPictures">Загрузка изображений</label>
+              <input th:field="*{multipartFile}" type="file" class="form-control" id="newPictures"
+              placeholder="Upload new product picture" multiple>
             </div>
-            <form method="POST" enctype="multipart/form-data" action="/">
-              <div class="form-group">
-                <div class="custom-file">
-                  <input type="file" class="custom-file-input" id="customFile" name="file">
-                  <label class="custom-file-label" for="customFile">Выберите файл</label>
-                </div>
+            <div class="form-row">
+              <div class="col form-group">
+                <label for="newPictures">Выберите ID карточки осмотра</label>
+                <select class="form-control" th:field="*{patientExams}">
+                  <option value="">Select...</option>
+                  <option th:each="c : ${patientExams}" th:utext="${c.id}" th:value="${c.id}"/>
+                </select>
               </div>
-
-              <button class="btn btn-primary" type="submit">Submit form</button>
-            </form>
-
-
-
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block">Сохранить</button>
+              </div>
+            </div>
           </div>
-
         </div>
+        </form>
+
 
       </div>
-      <!-- /.box-body -->
+      <!-- /.box -->
     </div>
-    <!-- /.box -->
   </div>
-  <!-- /.col -->
-</div>
 </div>
 
-<script th:src="@{assets/custom-file-input/bs-custom-file-input.js}"></script>
-<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
-<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+<th:block layout:fragment="script">
+  <script th:inline="javascript">
+    /*[+
 
-<script>
-  bsCustomFileInput.init();
-</script>
+    var id = [[${exams.exam_id}]];
+
+    +]*/
+
+    localStorage.setItem("idexam", id);
+
+    var ball = 3+4;
+    document.getElementById('newid').innerHTML  = ball;
+    document.getElementById('verynewid').innerHTML  = id;
+  </script>
+</th:block>
+
+
+
+
 </body>
+
 </html>
+
+
+
+
+
+<!-- <form th:object="${imageData}" method="post" th:action="@{/exam/load}" enctype="multipart/form-data">
+  <div class="card mb-4">
+    <div class="card-body">
+      <div class="form-group">
+        <label for="newPictures">Product image</label>
+        <input th:field="*{multipartFile}" type="file" class="form-control" id="newPictures"
+               placeholder="Upload new product picture" multiple>
+      </div>
+      <div class="form-row">
+        <div class="col form-group">
+          <select th:field="*{patientExam}">
+            <option th:each="c : *{patientExam}" th:text="${c.getAnamnez()}" th:value="${c.exam_id}"/>
+          </select>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary btn-block">Сохранить</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form> -->
+
+

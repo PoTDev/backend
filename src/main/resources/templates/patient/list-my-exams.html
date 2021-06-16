@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+    <title>Панель управления</title>
+</head>
+<body>
+<section layout:fragment="header">
+    <h1>
+        Мои осмотры
+        <small>Панель управления</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/"><i class="fa fa-dashboard"></i> Главная страница</a></li>
+        <li class="active">Панель управления</li>
+    </ol>
+</section>
+<div layout:fragment="content">
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Мои осмотры</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="row">
+
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table id="example1" class="table table-bordered table-striped dataTable" role="grid"
+                                       aria-describedby="example1_info">
+                                    <thead class="thead">
+                                    <tr>
+                                        <th>Электронная почта</th>
+                                        <th>Дата осмотра</th>
+                                        <th>Анамнез</th>
+                                        <th>Диагноз</th>
+                                        <th> </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="me : ${mepatient}">
+                                        <td th:text="${me.email}">Электронная почта</td>
+                                        <td th:text="${me.date}">Дата осмотра</td>
+                                        <td th:text="${me.anamnez}">Анамнез</td>
+                                        <td th:text="${me.diagnosis}">Диагноз</td>
+                                        <td>
+                                            <a href="#" class="btn btn-warning btn-xs purple editView" title="full" th:href="@{'/exam/full/' + ${me.id}}"><i class="fa fa-edit"></i> Посмотреть полностью</a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+</div>
+
+
+
+<th:block layout:fragment="script">
+    <script>
+        $(function () {
+
+            $('#example1').DataTable({
+                'paging'      : true,
+                'lengthChange': false,
+                'searching'   : true,
+                'ordering'    : true,
+                'info'        : true,
+                'autoWidth'   : false
+            })
+
+            jQuery('#example1_wrapper input').addClass("form-control input-sm"); // modify table search input
+        })
+
+
+    </script>
+</th:block>
+</body>
+
+</html>

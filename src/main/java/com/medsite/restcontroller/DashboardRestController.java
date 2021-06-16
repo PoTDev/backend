@@ -1,7 +1,7 @@
 package com.medsite.restcontroller;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.medsite.repository.IProductRepository;
+import com.medsite.repository.IPatientExamRepository;
 import com.medsite.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,24 +18,20 @@ import java.util.List;
 public class DashboardRestController {
 
     @Autowired
-    private IProductRepository productRepository;
+    private IPatientExamRepository patientExamRepository;
 
     @Autowired
     private IUserRepository userRepository;
 
-   /* @Autowired
-    private IProductTypeRepository productTypeRepository;*/
 
     @GetMapping("/statistics")
     public HashMap<String, Object> getDashboardStatistics(){
-        long lProductCount = productRepository.count();
-        //long lProductTypeCount = productTypeRepository.count();
+        long lPatientExamCount = patientExamRepository.count();
         long lUserCount = userRepository.count();
         long lVisitorsCount = 0;
 
         HashMap<String, Object> map = new HashMap<>();
-        map.put("count_product", lProductCount);
-        //map.put("count_producttype", lProductTypeCount);
+        map.put("count_patientexams", lPatientExamCount);
         map.put("count_user", lUserCount);
         map.put("count_visitors", lVisitorsCount);
 

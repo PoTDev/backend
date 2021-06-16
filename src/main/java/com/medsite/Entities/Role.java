@@ -35,5 +35,5 @@ public class Role {
         this.name = name;
     }
 
-    // other getters and setters are hidden for brevity
+
 }

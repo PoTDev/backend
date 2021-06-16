@@ -12,18 +12,6 @@ import java.util.List;
 @Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class User {
 
-    protected User() {
-    }
-    public User(String firstName, String lastName, String email, String password, Collection< Role > roles) {
-        super();
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-        this.roles = roles;
-        this.active=true;
-    }
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,7 +28,6 @@ public class User {
     }
 
 
-    //@NotEmpty(message = "First name can't be empty!")
     @Column(name = "first_name")
     private String firstName;
 
@@ -51,7 +38,6 @@ public class User {
         this.firstName=firstName;
     }
 
-    //@NotEmpty(message = "Last name can't be empty!")
     @Column(name = "last_name")
     private String lastName;
 
@@ -63,8 +49,6 @@ public class User {
     }
 
     @Column(name = "email")
-    //@Email(message = "*Please provide a valid Email")
-    //@NotEmpty(message = "*Please provide an email")
     private String email;
 
     public String getUserEmail() {
@@ -80,8 +64,6 @@ public class User {
 
 
     @Column(name = "password")
-    //@Length(min = 5, message = "*Your password must have at least 5 characters")
-    //@NotEmpty(message = "*Please provide your password")
     private String password;
 
     public String getPassword(){
@@ -99,6 +81,18 @@ public class User {
     }
     public void setActive(boolean active){
         this.active=active;
+    }
+
+    protected User() {
+    }
+    public User(String firstName, String lastName, String email, String password, Collection< Role > roles) {
+        super();
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
+        this.active=true;
     }
 
 

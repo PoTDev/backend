@@ -43,7 +43,6 @@ VALUES
 (9, 'Уролог');
 
 
-
 /*  Начало таблицы */
 drop table if exists roles;
 CREATE TABLE roles (
@@ -86,7 +85,7 @@ VALUES
 
 
 /*  Начало таблицы */
-DROP TABLE IF EXISTS patient_exams;
+DROP TABLE IF EXISTS patient_exams cascade;
 CREATE TABLE patient_exams (
                                exam_id                    bigserial,
                                email                 VARCHAR(50),
@@ -101,13 +100,16 @@ CREATE TABLE patient_exams (
 );
 
 
+
+/*  Начало таблицы */
+DROP TABLE IF EXISTS picture;
 create table picture(id bigserial NOT NULL,
                      image_data  bytea not null,
                      image_name  VARCHAR(50) not null,
-                     primary key (id));
+                     primary key (id)
+);
 
-
-
+/*  Начало таблицы */
 DROP TABLE IF EXISTS exam_picture;
 CREATE TABLE exam_picture (
                                  exam_id   INT NOT NULL,

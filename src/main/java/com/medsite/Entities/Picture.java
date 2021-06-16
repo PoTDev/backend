@@ -7,7 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
+
 import java.util.List;
 
 @Entity
@@ -37,13 +37,6 @@ public class Picture implements Serializable {
     private List<PatientExam> patientExams;
 
 
-    public List<PatientExam> getPatientExam() {
-        return patientExams;
-    }
-
-    public void setPatientExam(List<PatientExam> patientExams) {
-        this.patientExams = patientExams;
-    }
 
 
 }

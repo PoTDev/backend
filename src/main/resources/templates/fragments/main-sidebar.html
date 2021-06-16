@@ -32,18 +32,15 @@
                 <li class="active"><a th:href="@{/profile/list}"><i class="fa fa-circle-o"></i> Все пользователи</a></li>
                 </div>
 
-                <div sec:authorize="hasAuthority('ADMIN')">
+                <div sec:authorize="isAuthenticated()">
                 <li class="active"><a th:href="@{/exam/list}"><i class="fa fa-circle-o"></i> Все осмотры</a></li>
                 </div>
 
 
                 <div sec:authorize="hasAuthority('USER')">
-                    <li class="active"><a th:href="@{/profile/list}"><i class="fa fa-circle-o"></i> Мои осмотры</a></li>
+                    <li class="active"><a th:href="@{/exam/mylist}"><i class="fa fa-circle-o"></i> Мои осмотры</a></li>
                 </div>
 
-                <div sec:authorize="isAuthenticated()">
-                    <li class="active"><a th:href="@{/picture/load}"><i class="fa fa-circle-o"></i> Картинки</a></li>
-                </div>
 
 
                 <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}"><i class="fa fa-circle-o"></i> Выйти</a></li>

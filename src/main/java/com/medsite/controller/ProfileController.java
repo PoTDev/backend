@@ -120,15 +120,6 @@ public class ProfileController {
         return list_template;
     }
 
-    /*@GetMapping("/list/{search}")
-    public String findingProfiles(Model model, Pageable pageable, @PathVariable String search){
-        int pageIndex = 0;
-        if(params.containsKey("p")){
-            pageIndex = Integer.parseInt(params.get("p") )-1;
-        }
-        Pageable pageable = PageRequest.of(pageIndex, 5);*/
-
-
     }
 
 

@@ -33,7 +33,7 @@
                             <label class="col-sm-2 control-label">Exam Id</label>
 
                             <div class="col-sm-10">
-                                <input type="text" class="form-control"  readonly="readonly" th:field="*{exam_id}" placeholder="Exam Id">
+                                <input type="text" class="form-control"  readonly="readonly" th:field="*{id}" placeholder="Exam Id">
                             </div>
                         </div>
 
@@ -94,7 +94,7 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Загрузка доп.файлов</label>
                             <div class="col-sm-10">
-                            <a href="#" class="btn btn-primary btn-xs purple editView" title="Edit" th:href="@{'/picture/load/' + ${exams.exam_id}}"><i class="fa fa-edit"></i> Загрузить файлы</a>
+                            <a href="#" class="btn btn-primary btn-xs purple editView" title="Edit" th:href="@{/exam/load/}"><i class="fa fa-edit"></i> Загрузить файлы</a>
                             </div>
                         </div>
 
@@ -116,9 +116,23 @@
 </div>
 
 <th:block layout:fragment="script">
-    <script>
+    <script th:inline="javascript">
+        /*[+
+
+        var id = [[${exams.exam_id}]];
+
+        +]*/
+
+        localStorage.setItem("idexam", id);
+
+        var ball = 3+4;
+        document.getElementById('newid').innerHTML  = ball;
+        document.getElementById('verynewid').innerHTML  = id;
     </script>
 </th:block>
+
+
+
 
 </body>
 

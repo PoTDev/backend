@@ -2,11 +2,16 @@ package com.medsite.controller;
 
 import com.medsite.Entities.PatientExam;
 import com.medsite.Entities.Picture;
+import com.medsite.Entities.Role;
+import com.medsite.Entities.User;
+import com.medsite.repository.IMyProfileRepository;
 import com.medsite.repository.IPatientExamRepository;
+import com.medsite.repository.PictureRepository;
 import com.medsite.service.PatientExamService;
 import com.medsite.service.PictureService;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,6 +24,7 @@ import javax.validation.Valid;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -37,6 +43,7 @@ public class PatientExamController {
     @Autowired
     private IPatientExamRepository examrepo;
 
+
     private String add_edit_template="/patient/add-edit-exam";
     private String list_template="/patient/list-exam";
     private String list_full_template="/patient/view-full-exam";
@@ -44,6 +51,7 @@ public class PatientExamController {
 
     private String loadImage="/patient/loadImage";
     private String viewImage="/patient/viewImage";
+    private String list_my_exams ="/patient/list-my-exams";
 
 
     @GetMapping("/add")
@@ -61,8 +69,6 @@ public class PatientExamController {
         PatientExam patientExam = patientExamService.get(id);
         model.addAttribute("exams", patientExam);
 
-        Picture image = new Picture();
-        image.setPatientExam(new ArrayList<PatientExam>(patientExamService.listAll()));
 
         return add_edit_template;
     }
@@ -101,6 +107,18 @@ public class PatientExamController {
         return list_template;
     }
 
+    @GetMapping("/mylist")
+    public String mylistExam(Model model, Principal principal) {
+
+        PatientExam mepatient = examrepo.findByEmail(principal.getName());
+
+        model.addAttribute("mepatient", mepatient);
+
+
+        return list_my_exams;
+    }
+
+
     @GetMapping("/full/{id}")
     public String listFullExam(@PathVariable("id") long id, Model model) {
 
@@ -111,41 +129,68 @@ public class PatientExamController {
         return list_full_template;
     }
 
+    @Autowired
+    private PictureRepository pictureRepository;
 
-    /*@PostMapping("/load")
+    @GetMapping("/load/")
+    public String loadImage(Model model){
+
+        Picture image = new Picture();
+        image.setPatientExams(new ArrayList<PatientExam>(patientExamService.listAll()));
+
+        model.addAttribute("imageData", image);
+        return loadImage;
+    }
+
+
+    @PostMapping("/load/")
     public  String saveImage(@ModelAttribute(name = "imageData")Picture picture,
-                             @RequestParam(name = "patientExam") PatientExam patientExam){
+                             @RequestParam(name = "patientExams") PatientExam patientExam){
 
         try {
+            picture.setImage_data(picture.getMultipartFile().getBytes());
+            picture.setName(picture.getMultipartFile().getOriginalFilename());
 
-            picture.setImage_data(picture.getMultipartFile().getBytes()); //в байты
-            picture.setName(picture.getMultipartFile().getOriginalFilename()); //сохранить имя
+            for(PatientExam i : picture.getPatientExams()){
+                System.out.println(i.getClass() );
+                System.out.println(i.getEmail() + "   " + i.getDiagnosis());
+            }
 
-            patientExam.setPictures();
             pictureService.save(picture);
-
             System.out.println("Image saved.....");
-
         } catch (IOException e) {
             System.out.println("IO_Exeption");
+
         }
         return list_redirect+"?success";
-    }*/
+    }
 
 
     @GetMapping("pic/{id}")
-    public String viewImage(Model model, @PathVariable("id") long id, HttpServletResponse response) throws IOException{
-
-        response.setContentType("image/png");
-
+    public String viewImage(Model model, @PathVariable Long id){
+        PatientExam patientExam = patientExamService.findById(id);
         Optional<Picture> picture = pictureService.findById(id);
+        //List<Picture> pictures = patientExam.getPictures();
 
 
-        InputStream is = new ByteArrayInputStream(picture.get().getImage_data());
-        IOUtils.copy(is, response.getOutputStream());
+        System.out.println("_______________________________________");
+        System.out.println(picture.get().getId());
+        System.out.println(picture.get().getImage_data());
+        for(PatientExam i : picture.get().getPatientExams()) {
+            System.out.println(i);
+            System.out.println("pic");
+        }
+        System.out.println("_______________________________________");
+        System.out.println(patientExam.getId());
+        System.out.println(patientExam.getEmail());
+        /*for(Picture i : patientExam.getPictures()) {
+            System.out.println(i);
+            System.out.println("prod");
+        }
+        System.out.println("_______________________________________");*/
 
 
-        model.addAttribute("picture", IOUtils.copy(is, response.getOutputStream()));
+        model.addAttribute("picture", picture.get().getImage_data());
         return viewImage;
     }
 }

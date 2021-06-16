@@ -70,9 +70,9 @@
                                     <td th:text="${exams.anamnez}">Анамнез</td>
                                     <td th:text="${exams.diagnosis}">Диагноз</td>
                                     <td>
-                                        <a href="#" class="btn btn-primary btn-xs purple editView" title="Edit" th:href="@{'/exam/edit/' + ${exams.exam_id}}"><i class="fa fa-edit"></i> Редактировать</a>
-                                        <a href="#" class="btn btn-warning btn-xs purple editView" title="full" th:href="@{'/exam/full/' + ${exams.exam_id}}"><i class="fa fa-edit"></i> Посмотреть полностью</a>
-                                        <a href="#" class="btn btn-danger btn-xs purple deleteView" title="Delete" th:href="@{'/exam/delete/' + ${exams.exam_id}}"><i class="fa fa-trash-o"></i> Удалить</a>
+                                        <a href="#" class="btn btn-primary btn-xs purple editView" title="Edit" th:href="@{'/exam/edit/' + ${exams.id}}"><i class="fa fa-edit"></i> Редактировать</a>
+                                        <a href="#" class="btn btn-warning btn-xs purple editView" title="full" th:href="@{'/exam/full/' + ${exams.id}}"><i class="fa fa-edit"></i> Посмотреть полностью</a>
+                                        <a href="#" class="btn btn-danger btn-xs purple deleteView" title="Delete" th:href="@{'/exam/delete/' + ${exams.id}}"><i class="fa fa-trash-o"></i> Удалить</a>
                                     </td>
                                 </tr>
                                 </tbody>

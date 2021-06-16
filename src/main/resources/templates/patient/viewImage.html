@@ -22,33 +22,36 @@
 
 <div layout:fragment="content">
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <div class="card card-primary">
-                    <div class="card-header">
-                        <h4 class="card-title">Ekko Lightbox</h4>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Просмотр изображений</h3>
+                </div>
+                <!-- /.box-header -->
+
+                <div class="box-body">
+                    <div class="box-footer center">
+
+                            <!--        <object th:object="${product}" th:text="*{coast}" >-->
+                            <!--            <img th:each="c : *{pictures}" th:src="c">-->
+                            <!--        </object>-->
+
+                            <img  th:src="${picture}">
+
+
+                        </p>
+
                     </div>
 
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-sm-2">
-                                <a href="https://via.placeholder.com/1200/FFFFFF.png?text=1" data-toggle="lightbox" data-title="sample 1 - white" data-gallery="gallery">
-                                    <img src="https://via.placeholder.com/300/FFFFFF?text=1" class="img-fluid mb-2" alt="white sample"/>
-                                </a>
-                            </div>
-                        <a href="#" class="btn btn-warning btn-xs purple editView" title="full" th:href="@{'/exam/list/'}"><i class="fa fa-edit"></i> Сброс</a>
-                        </div>
-                    </div>
                 </div>
-            <!-- /.box-body -->
+                <!-- /.box-body -->
             </div>
-        <!-- /.box -->
+            <!-- /.box -->
         </div>
-    <!-- /.col -->
+        <!-- var id = (parseInt(localStorage.getItem("idexam"))); /.col -->
     </div>
 </div>
-
 
 <th:block layout:fragment="script">
     <script>
