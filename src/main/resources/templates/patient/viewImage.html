@@ -33,19 +33,22 @@
                 <div class="box-body">
                     <div class="box-footer center">
 
-                            <!--        <object th:object="${product}" th:text="*{coast}" >-->
-                            <!--            <img th:each="c : *{pictures}" th:src="c">-->
-                            <!--        </object>-->
+                        <!--<object th:object="${product}" th:text="*{coast}" >-->
+                        <img th:each="c : *{picturesList}" th:src="*{'data:image/png;base64,'+c}">
+                        <!-- <img th:src="*{'data:image/png;base64,'+picture}">-->
+                        <!-- </object>-->
 
-                            <img  th:src="${picture}">
+                        <!-- <img  th:src="${picture}">-->
 
 
-                        </p>
-
-                    </div>
-
+                    </p>
+                        <a th:href="@{/exam/list}">
+                            <button type="button" class="btn btn-default"><i class="fa fa-right"></i> Выход</button>
+                        </a>
                 </div>
-                <!-- /.box-body -->
+
+            </div>
+            <!-- /.box-body -->
             </div>
             <!-- /.box -->
         </div>

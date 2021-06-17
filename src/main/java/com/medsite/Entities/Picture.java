@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.persistence.*;
 import java.io.Serializable;
 
+import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -32,9 +33,21 @@ public class Picture implements Serializable {
     @Transient
     private MultipartFile multipartFile;
 
+    @Column(name = "patient_exams_exam_id", insertable = false,updatable = false)
+    private String id_of_exam;
 
-    @ManyToMany(mappedBy = "pictures")
-    private List<PatientExam> patientExams;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private PatientExam patientExams;
+
+
+    public byte[] getImage_data(){
+        return this.image_data;
+    }
+
+
+
+    /*@ManyToMany(mappedBy = "pictures")
+    private List<PatientExam> patientExams;*/
 
 
 

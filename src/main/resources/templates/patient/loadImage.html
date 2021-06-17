@@ -22,7 +22,7 @@
       <!-- Horizontal Form -->
       <div class="box box-info">
         <div class="box-header with-border">
-          <h3 class="box-title">Все осмотры</h3>
+          <h3 class="box-title">Загрузка изображений</h3>
         </div>
         <!-- /.box-header -->
         <!-- form start -->
@@ -41,10 +41,11 @@
                 <label for="newPictures">Выберите ID карточки осмотра</label>
                 <select class="form-control" th:field="*{patientExams}">
                   <option value="">Select...</option>
-                  <option th:each="c : ${patientExams}" th:utext="${c.id}" th:value="${c.id}"/>
+                  <option th:each="c : ${patientExams}" th:utext="${c.getId()}" th:value="${c.id}"/>
                 </select>
               </div>
               <div class="form-group">
+                <!--<<input class="btn btn-primary btn-block" name="submit" type="submit" value="submit" />-->
                 <button type="submit" class="btn btn-primary btn-block">Сохранить</button>
               </div>
             </div>
@@ -60,18 +61,8 @@
 </div>
 
 <th:block layout:fragment="script">
-  <script th:inline="javascript">
-    /*[+
+  <script>
 
-    var id = [[${exams.exam_id}]];
-
-    +]*/
-
-    localStorage.setItem("idexam", id);
-
-    var ball = 3+4;
-    document.getElementById('newid').innerHTML  = ball;
-    document.getElementById('verynewid').innerHTML  = id;
   </script>
 </th:block>
 

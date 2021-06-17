@@ -8,7 +8,7 @@
 <body>
 <section layout:fragment="header">
     <h1>
-        Список пользователей
+        Редактирование осмотра
         <small>Панель управления</small>
     </h1>
     <ol class="breadcrumb">
@@ -22,7 +22,7 @@
             <!-- Horizontal Form -->
             <div class="box box-info">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Все осмотры</h3>
+                    <h3 class="box-title">Редактирование осмотра</h3>
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
@@ -116,21 +116,10 @@
 </div>
 
 <th:block layout:fragment="script">
-    <script th:inline="javascript">
-        /*[+
+    <script>
 
-        var id = [[${exams.exam_id}]];
-
-        +]*/
-
-        localStorage.setItem("idexam", id);
-
-        var ball = 3+4;
-        document.getElementById('newid').innerHTML  = ball;
-        document.getElementById('verynewid').innerHTML  = id;
     </script>
 </th:block>
-
 
 
 

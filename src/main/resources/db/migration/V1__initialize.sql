@@ -84,7 +84,7 @@ VALUES
 
 
 
-/*  Начало таблицы */
+/*  Начало таблицы. Таблица осмотров*/
 DROP TABLE IF EXISTS patient_exams cascade;
 CREATE TABLE patient_exams (
                                exam_id                    bigserial,
@@ -99,25 +99,22 @@ CREATE TABLE patient_exams (
 
 );
 
-
+INSERT INTO patient_exams (email, date, petition, anamnez, common_data, diagnosis, advice)
+VALUES
+('user1@user.ru', '14.06.2021', 'Головная боль','Головная боль','Жалобы на постоянную головную боль','Мигрень','Отдых'),
+('user1@user.ru', '14.06.2021', 'Боль в ноге','Ушиб','Жалобы на боль при ходьбе','Ушиб','Отдых');
 
 /*  Начало таблицы */
 DROP TABLE IF EXISTS picture;
 create table picture(id bigserial NOT NULL,
                      image_data  bytea not null,
                      image_name  VARCHAR(50) not null,
-                     primary key (id)
+                     patient_exams_exam_id int not null,
+                     primary key (id),
+                     FOREIGN KEY (patient_exams_exam_id)
+                         REFERENCES patient_exams (exam_id)
 );
 
-/*  Начало таблицы */
-DROP TABLE IF EXISTS exam_picture;
-CREATE TABLE exam_picture (
-                                 exam_id   INT NOT NULL,
-                                 picture_id   INT NOT NULL,
-                                 PRIMARY KEY (exam_id, picture_id),
-                                 foreign key (exam_id) REFERENCES patient_exams (exam_id),
-                                 foreign key (picture_id) REFERENCES picture (id)
-);
 
 
 

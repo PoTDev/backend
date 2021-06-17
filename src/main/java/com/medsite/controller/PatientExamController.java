@@ -25,10 +25,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 @RequestMapping("/exam")
@@ -136,14 +133,16 @@ public class PatientExamController {
     public String loadImage(Model model){
 
         Picture image = new Picture();
-        image.setPatientExams(new ArrayList<PatientExam>(patientExamService.listAll()));
-
+//        image.setPatientExams(new ArrayList<PatientExam>(patientExamService.listAll()));
+        //patientExams
+        System.out.println("HERE **************>>>>>>>" + patientExamService.listAll());
+        model.addAttribute("patientExams", patientExamService.listAll());
         model.addAttribute("imageData", image);
         return loadImage;
     }
 
 
-    @PostMapping("/load/")
+    @PostMapping("/load")
     public  String saveImage(@ModelAttribute(name = "imageData")Picture picture,
                              @RequestParam(name = "patientExams") PatientExam patientExam){
 
@@ -151,10 +150,10 @@ public class PatientExamController {
             picture.setImage_data(picture.getMultipartFile().getBytes());
             picture.setName(picture.getMultipartFile().getOriginalFilename());
 
-            for(PatientExam i : picture.getPatientExams()){
-                System.out.println(i.getClass() );
-                System.out.println(i.getEmail() + "   " + i.getDiagnosis());
-            }
+//            for(PatientExam i : picture.getPatientExams()){
+//                System.out.println(i.getClass() );
+//                System.out.println(i.getEmail() + "   " + i.getDiagnosis());
+//            }
 
             pictureService.save(picture);
             System.out.println("Image saved.....");
@@ -169,28 +168,45 @@ public class PatientExamController {
     @GetMapping("pic/{id}")
     public String viewImage(Model model, @PathVariable Long id){
         PatientExam patientExam = patientExamService.findById(id);
-        Optional<Picture> picture = pictureService.findById(id);
+        List<Picture> pictures = pictureService.findAllByPatientExams_Id(id);
         //List<Picture> pictures = patientExam.getPictures();
 
 
-        System.out.println("_______________________________________");
-        System.out.println(picture.get().getId());
-        System.out.println(picture.get().getImage_data());
-        for(PatientExam i : picture.get().getPatientExams()) {
-            System.out.println(i);
-            System.out.println("pic");
-        }
+//        System.out.println("_______________________________________" + picture.size());
+//        System.out.println(picture.get(0).getId());
+//        System.out.println(picture.get(0).getImage_data());
+//        for(PatientExam i : picture.get().getPatientExams()) {
+//            System.out.println(i);
+//            System.out.println("pic");
+//        }
         System.out.println("_______________________________________");
         System.out.println(patientExam.getId());
         System.out.println(patientExam.getEmail());
-        /*for(Picture i : patientExam.getPictures()) {
+        for(Picture i : patientExam.getPictures()) {
             System.out.println(i);
             System.out.println("prod");
         }
-        System.out.println("_______________________________________");*/
+        System.out.println("_______________________________________");
+        List<String> encodedImages = new ArrayList<>();
+        for (Picture picture: pictures) {
+            String encodedString = Base64.getEncoder().encodeToString(picture.getImage_data());
+            encodedImages.add(encodedString);
+        }
+//        String encodedSttring = Base64.getEncoder().encodeToString(picture.get(0).getImage_data());
 
-
-        model.addAttribute("picture", picture.get().getImage_data());
+        model.addAttribute("picturesList", encodedImages);
+//        model.addAttribute("picture", encodedString);
         return viewImage;
     }
+
+    @GetMapping("/pic/delete/{id}")
+    public String deleteImage(@PathVariable("id") long id, Model model) {
+        pictureService.delete(id);
+
+        return list_redirect+"?deleted";
+    }
+
+
+
+
 }

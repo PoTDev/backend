@@ -67,9 +67,17 @@ public class PatientExam {
 
     }*/
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    /*@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "exam_picture",
-            joinColumns = @JoinColumn(name = "exam_id"),
-            inverseJoinColumns = @JoinColumn(name = "picture_id"))
-    private List<Picture> pictures;
+            joinColumns = @JoinColumn(
+                    name = "exam_id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "picture_id"))
+
+    private Collection <Picture> pictures;*/
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "picture_id")
+    private Collection<Picture> pictures=new ArrayList<>();
+
 }
