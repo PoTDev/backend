@@ -5,7 +5,6 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 @Entity
 @Data
@@ -49,32 +48,6 @@ public class PatientExam {
     private String advice; //рекомендации
     //-----------------------------------
 
-    /*public PatientExam(String email,
-                        String date,
-                        String petition,
-                        String anamnez,
-                        String commonData,
-                        String diagnosis,
-                        String advice
-                       ){
-        this.email = email;
-        this.date = date;
-        this.petition = petition;
-        this.anamnez = anamnez;
-        this.commonData = commonData;
-        this.diagnosis = diagnosis;
-        this.advice = advice;*
-
-    }*/
-
-    /*@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "exam_picture",
-            joinColumns = @JoinColumn(
-                    name = "exam_id"),
-            inverseJoinColumns = @JoinColumn(
-                    name = "picture_id"))
-
-    private Collection <Picture> pictures;*/
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "picture_id")

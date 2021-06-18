@@ -2,28 +2,18 @@ package com.medsite.controller;
 
 import com.medsite.Entities.PatientExam;
 import com.medsite.Entities.Picture;
-import com.medsite.Entities.Role;
-import com.medsite.Entities.User;
-import com.medsite.repository.IMyProfileRepository;
 import com.medsite.repository.IPatientExamRepository;
 import com.medsite.repository.PictureRepository;
 import com.medsite.service.PatientExamService;
 import com.medsite.service.PictureService;
-import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.security.Principal;
 import java.util.*;
 
@@ -107,7 +97,7 @@ public class PatientExamController {
     @GetMapping("/mylist")
     public String mylistExam(Model model, Principal principal) {
 
-        PatientExam mepatient = examrepo.findByEmail(principal.getName());
+        List<PatientExam> mepatient = examrepo.findAllByEmail(principal.getName());
 
         model.addAttribute("mepatient", mepatient);
 
@@ -133,9 +123,7 @@ public class PatientExamController {
     public String loadImage(Model model){
 
         Picture image = new Picture();
-//        image.setPatientExams(new ArrayList<PatientExam>(patientExamService.listAll()));
-        //patientExams
-        System.out.println("HERE **************>>>>>>>" + patientExamService.listAll());
+
         model.addAttribute("patientExams", patientExamService.listAll());
         model.addAttribute("imageData", image);
         return loadImage;
@@ -150,10 +138,6 @@ public class PatientExamController {
             picture.setImage_data(picture.getMultipartFile().getBytes());
             picture.setName(picture.getMultipartFile().getOriginalFilename());
 
-//            for(PatientExam i : picture.getPatientExams()){
-//                System.out.println(i.getClass() );
-//                System.out.println(i.getEmail() + "   " + i.getDiagnosis());
-//            }
 
             pictureService.save(picture);
             System.out.println("Image saved.....");
@@ -168,17 +152,10 @@ public class PatientExamController {
     @GetMapping("pic/{id}")
     public String viewImage(Model model, @PathVariable Long id){
         PatientExam patientExam = patientExamService.findById(id);
+
         List<Picture> pictures = pictureService.findAllByPatientExams_Id(id);
-        //List<Picture> pictures = patientExam.getPictures();
 
 
-//        System.out.println("_______________________________________" + picture.size());
-//        System.out.println(picture.get(0).getId());
-//        System.out.println(picture.get(0).getImage_data());
-//        for(PatientExam i : picture.get().getPatientExams()) {
-//            System.out.println(i);
-//            System.out.println("pic");
-//        }
         System.out.println("_______________________________________");
         System.out.println(patientExam.getId());
         System.out.println(patientExam.getEmail());
@@ -192,10 +169,9 @@ public class PatientExamController {
             String encodedString = Base64.getEncoder().encodeToString(picture.getImage_data());
             encodedImages.add(encodedString);
         }
-//        String encodedSttring = Base64.getEncoder().encodeToString(picture.get(0).getImage_data());
 
         model.addAttribute("picturesList", encodedImages);
-//        model.addAttribute("picture", encodedString);
+
         return viewImage;
     }
 

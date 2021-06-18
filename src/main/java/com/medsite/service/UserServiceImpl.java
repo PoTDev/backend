@@ -42,7 +42,7 @@ public class UserServiceImpl implements IUserService{
     @Override
     public User save(UserRegistrationDto registrationDto) {
 
-        //Creating admin role user
+        //Создание роли
         User user = new User(
                 registrationDto.getFirstName()
                 ,registrationDto.getLastName()

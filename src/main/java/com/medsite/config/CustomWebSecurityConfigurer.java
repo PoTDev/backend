@@ -13,9 +13,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-/**
- * Created by noman.
- */
 @Configuration
 @EnableWebSecurity
 public class CustomWebSecurityConfigurer extends WebSecurityConfigurerAdapter {
@@ -45,9 +42,6 @@ public class CustomWebSecurityConfigurer extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-        //.antMatchers("/product/**").hasRole("ADMIN")
-        //.antMatchers("/medic/**").hasRole("MEDIC")
-        //.antMatchers("/user/**").hasRole("USER")
         .antMatchers("/register**",
                 "/dist/**"
                 , "/plugins/**"
@@ -70,7 +64,6 @@ public class CustomWebSecurityConfigurer extends WebSecurityConfigurerAdapter {
 
     }
     public void configure(WebSecurity web) throws Exception {
-       // web.ignoring().antMatchers("/resources/static/**").anyRequest();
     }
 
 }

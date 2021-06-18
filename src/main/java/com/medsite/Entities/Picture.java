@@ -8,8 +8,6 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.persistence.*;
 import java.io.Serializable;
 
-import java.util.Collection;
-import java.util.List;
 
 @Entity
 @Data
@@ -44,10 +42,6 @@ public class Picture implements Serializable {
         return this.image_data;
     }
 
-
-
-    /*@ManyToMany(mappedBy = "pictures")
-    private List<PatientExam> patientExams;*/
 
 
 

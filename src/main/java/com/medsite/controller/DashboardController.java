@@ -12,7 +12,6 @@ public class DashboardController {
         return "admin/dashboard/index";
     }
 
-    // Added to test 500 page
     @RequestMapping(path = "/tigger-error", produces = MediaType.APPLICATION_JSON_VALUE)
     public void error500() throws Exception {
         throw new Exception();

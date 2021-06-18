@@ -1,6 +1,7 @@
 package com.medsite.service;
 
 import com.medsite.Entities.PatientExam;
+import com.medsite.Entities.Picture;
 import com.medsite.repository.IPatientExamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -60,6 +61,11 @@ public class PatientExamService {
 
     public PatientExam findById(Long id){
         return repoExam.findById(id).get();
+    }
+
+    public List<PatientExam> findAllByEmail(String email){
+        return repoExam.findAllByEmail(email);
+
     }
 
 

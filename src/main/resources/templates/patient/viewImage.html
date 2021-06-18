@@ -33,12 +33,9 @@
                 <div class="box-body">
                     <div class="box-footer center">
 
-                        <!--<object th:object="${product}" th:text="*{coast}" >-->
-                        <img th:each="c : *{picturesList}" th:src="*{'data:image/png;base64,'+c}">
-                        <!-- <img th:src="*{'data:image/png;base64,'+picture}">-->
-                        <!-- </object>-->
 
-                        <!-- <img  th:src="${picture}">-->
+                        <img th:each="c : *{picturesList}" th:src="*{'data:image/png;base64,'+c}">
+
 
 
                     </p>
@@ -52,7 +49,7 @@
             </div>
             <!-- /.box -->
         </div>
-        <!-- var id = (parseInt(localStorage.getItem("idexam"))); /.col -->
+
     </div>
 </div>
 
